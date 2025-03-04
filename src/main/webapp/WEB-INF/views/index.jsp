@@ -11,9 +11,9 @@
     <title>TalkHub</title>
 </head>
 <body>
-  <h1>TalkHub</h1>
-  <p>
+<h1>TalkHub</h1>
+<p>
     TalkHub 에 오신 것을 환영합니다!
-  </p>
+</p>
 </body>
 </html>
