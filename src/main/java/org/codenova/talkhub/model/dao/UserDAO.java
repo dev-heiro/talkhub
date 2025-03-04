@@ -1,8 +1,12 @@
 package org.codenova.talkhub.model.dao;
 
+import org.codenova.talkhub.model.vo.User;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
 
 /*
     user 테이블에 관련된 DB 작업을 처리하게 될거임.
@@ -35,6 +39,36 @@ public class UserDAO {
 
         return result;
     } // end boolean create(String id, String password, .... ) ================================================
+
+    // id로 유저정보 찾기
+    // select * from users where id=?
+    public User findById(String specificId) {
+        User one = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://database.ch662qumapvg.ap-northeast-2.rds.amazonaws.com:3306/talkhub",
+                    "admin", "1q2w3e4r");
+            PreparedStatement ps = conn.prepareStatement("select * from users where id=?");
+            ps.setString(1, specificId);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                one = new User();
+
+                one.setId(rs.getString("id"));
+                one.setPassword(rs.getString("password"));
+                one.setNickname(rs.getString("nickname"));
+                one.setGender(rs.getString("gender"));
+                one.setBirth(rs.getInt("birth"));
+                one.setCreatedAt(rs.getDate("created_at"));
+            }
+            conn.close();
+        }catch(Exception e) {
+            System.out.println("UserDAO.findById : "+ e.toString() );
+        }
+        return one;
+    } // end User findById(String specificId) =====================================
+
 
 
 }
