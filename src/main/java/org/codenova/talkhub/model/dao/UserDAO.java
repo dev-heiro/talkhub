@@ -1,6 +1,7 @@
 package org.codenova.talkhub.model.dao;
 
 import org.codenova.talkhub.model.vo.User;
+import org.codenova.talkhub.util.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,9 +19,7 @@ public class UserDAO {
     public boolean create(String id, String password, String nickname, String gender, int birth) {
         boolean result = false;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://database.ch662qumapvg.ap-northeast-2.rds.amazonaws.com:3306/talkhub",
-                                                            "admin", "1q2w3e4r");
+            Connection conn = ConnectionFactory.open();
 
             PreparedStatement ps = conn.prepareStatement("insert into users values(?, ?, ?, ?, ?, now())");
             ps.setString(1, id);
@@ -45,9 +44,8 @@ public class UserDAO {
     public User findById(String specificId) {
         User one = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://database.ch662qumapvg.ap-northeast-2.rds.amazonaws.com:3306/talkhub",
-                    "admin", "1q2w3e4r");
+
+            Connection conn = ConnectionFactory.open();
             PreparedStatement ps = conn.prepareStatement("select * from users where id=?");
             ps.setString(1, specificId);
 
