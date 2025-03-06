@@ -33,7 +33,16 @@ public class LoginProceedServlet extends HttpServlet {
                 // 인증성공
                 HttpSession session = req.getSession();
                 session.setAttribute("user", found);
-                resp.sendRedirect(req.getContextPath() + "/index");
+
+                if(session.getAttribute("callback") == null) {
+                    resp.sendRedirect(req.getContextPath() + "/index");
+                }else {
+                    String callback = (String)session.getAttribute("callback");
+                    session.removeAttribute("callback");
+                    resp.sendRedirect(callback);
+                }
+
+
             }else {
                 // 인증 실패
                 req.setAttribute("error", "아이디 또는 비밀번호가 잘못되었습니다.");
