@@ -20,7 +20,7 @@
     <c:forEach var="one" items="${posts}">
         <li style="display: flex; justify-content: space-between">
             <div>
-                <a href="#">📝[${one.category}] ${one.title}</a>
+                <a href="${pageContext.request.contextPath}/post/view?id=${one.id}">📝[${one.category}] ${one.title}</a>
             </div>
             <div >
                 ✍️ ${one.writerId}  | 🕒 ${one.writedAt} | 👀 ${one.views } | ❤️ ${one.likes}

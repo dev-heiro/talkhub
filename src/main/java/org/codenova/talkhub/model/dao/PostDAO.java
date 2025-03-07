@@ -41,11 +41,9 @@ public class PostDAO {
             PreparedStatement ps = conn.prepareStatement("select * from posts where id = ?");
             ps.setInt(1, postId);
 
-
             ResultSet rs = ps.executeQuery();
             if(rs.next()) {
                 one = new Post();
-
                 one.setId(rs.getInt("id"));
                 one.setWriterId(rs.getString("writer_id"));
                 one.setCategory(rs.getString("category"));
@@ -56,7 +54,6 @@ public class PostDAO {
                 one.setWritedAt(rs.getDate("writed_at"));
                 one.setModifiedAt(rs.getDate("modified_at"));
             }
-
             conn.close();
         }catch(Exception e) {
             System.out.println("UserDAO.create : "+ e.toString() );
