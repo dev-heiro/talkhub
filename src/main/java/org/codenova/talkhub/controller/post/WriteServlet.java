@@ -18,10 +18,11 @@ public class WriteServlet extends HttpServlet {
             req.getSession().setAttribute("callback", req.getContextPath()+"/post/write");
             resp.sendRedirect(req.getContextPath()+"/user/login");
             return;
+        } else {
+
+
+            req.getRequestDispatcher("/WEB-INF/views/post/write.jsp").forward(req, resp);
         }
-
-
-        req.getRequestDispatcher("/WEB-INF/views/post/write.jsp").forward(req, resp);
 
 
     }

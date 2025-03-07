@@ -28,7 +28,7 @@ public class PostDAO {
 
             conn.close();
         }catch(Exception e) {
-            System.out.println("UserDAO.create : "+ e.toString() );
+            System.out.println("PostDAO.create : "+ e.toString() );
         }
         return result;
     }
@@ -71,7 +71,6 @@ public class PostDAO {
             Connection conn = ConnectionFactory.open();
 
             PreparedStatement ps = conn.prepareStatement("select * from posts order by id desc");
-
 
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {

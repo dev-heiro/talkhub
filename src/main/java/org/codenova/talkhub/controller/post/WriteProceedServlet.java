@@ -33,5 +33,6 @@ public class WriteProceedServlet extends HttpServlet {
         PostDAO postDAO = new PostDAO();
         boolean result = postDAO.create(post);
 
+
     }
 }
