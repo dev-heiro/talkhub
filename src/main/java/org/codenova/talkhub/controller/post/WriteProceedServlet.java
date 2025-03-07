@@ -33,6 +33,11 @@ public class WriteProceedServlet extends HttpServlet {
         PostDAO postDAO = new PostDAO();
         boolean result = postDAO.create(post);
 
+        if(result) {
+            resp.sendRedirect(req.getContextPath() + "/post/list");
+        }else {
+            req.getRequestDispatcher("/WEB-INF/view/post/write-error.jsp").forward(req, resp);
+        }
 
     }
 }

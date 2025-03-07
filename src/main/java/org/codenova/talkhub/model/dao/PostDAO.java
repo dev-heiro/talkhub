@@ -70,7 +70,7 @@ public class PostDAO {
             PreparedStatement ps = conn.prepareStatement("select * from posts order by id desc");
 
             ResultSet rs = ps.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Post one = new Post();
 
                 one.setId(rs.getInt("id"));
@@ -87,10 +87,47 @@ public class PostDAO {
             }
 
             conn.close();
-        }catch(Exception e) {
-            System.out.println("UserDAO.create : "+ e.toString() );
+        } catch (Exception e) {
+            System.out.println("UserDAO.create : " + e.toString());
         }
-
         return posts;
+    }
+
+    // 조회수 증가 (by Id)
+    public boolean increaseViewsById(int postId) {
+        boolean result = false;
+        /*
+            try with resources statement
+             closable 한 객체를 try 와 함께 생성하면, try 종료시 자동 close()
+        */
+        try(Connection conn = ConnectionFactory.open()) {
+            PreparedStatement ps = conn.prepareStatement("update posts set views = views + 1 where id = ?");
+            ps.setInt(1, postId);
+
+            int r = ps.executeUpdate();
+            if(r > 0) {
+                result = true;
+            }
+        }catch(Exception e) {
+            System.out.println("PostDAO.create : "+ e.toString() );
+        }
+        return result;
+    }
+
+    // 좋아요 증가 (by Id)
+    public boolean increaseLikesById(int postId) {
+        boolean result = false;
+        try(Connection conn = ConnectionFactory.open()) {
+            PreparedStatement ps = conn.prepareStatement("update posts set likes = likes + 1 where id = ?");
+            ps.setInt(1, postId);
+
+            int r = ps.executeUpdate();
+            if(r > 0) {
+                result = true;
+            }
+        }catch(Exception e) {
+            System.out.println("PostDAO.create : "+ e.toString() );
+        }
+        return result;
     }
 }

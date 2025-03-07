@@ -21,6 +21,27 @@
   <hr/>
   <p style="white-space: pre-wrap">${post.content }</p>
   <hr/>
-
+  <a href="${pageContext.request.contextPath}/post/like-proceed?id=${post.id}">
+    <button type="button">추천하기</button>
+  </a>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

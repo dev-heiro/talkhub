@@ -19,7 +19,11 @@ public class ViewServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
 
         PostDAO dao = new PostDAO();
+
+        boolean r = dao.increaseViewsById(id);
         Post one = dao.findById(id);
+
+
 
         if(one == null) {
             resp.sendRedirect(req.getContextPath()+"/post/list");
