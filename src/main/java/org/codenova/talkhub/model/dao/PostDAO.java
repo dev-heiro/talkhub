@@ -5,8 +5,12 @@ import org.codenova.talkhub.util.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostDAO {
+    // 데이터 추가
     public boolean create(Post one) {
         boolean result = false;
         try {
@@ -27,5 +31,70 @@ public class PostDAO {
             System.out.println("UserDAO.create : "+ e.toString() );
         }
         return result;
+    }
+    // 데이터 찾기 (by Id)
+    public Post findById(int postId) {
+        Post one = null;
+        try {
+            Connection conn = ConnectionFactory.open();
+
+            PreparedStatement ps = conn.prepareStatement("select * from posts where id = ?");
+            ps.setInt(1, postId);
+
+
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                one = new Post();
+
+                one.setId(rs.getInt("id"));
+                one.setWriterId(rs.getString("writer_id"));
+                one.setCategory(rs.getString("category"));
+                one.setTitle(rs.getString("title"));
+                one.setContent(rs.getString("content"));
+                one.setLikes(rs.getInt("likes"));
+                one.setViews(rs.getInt("views"));
+                one.setWritedAt(rs.getDate("writed_at"));
+                one.setModifiedAt(rs.getDate("modified_at"));
+            }
+
+            conn.close();
+        }catch(Exception e) {
+            System.out.println("UserDAO.create : "+ e.toString() );
+        }
+        return one;
+    }
+
+    // 데이터 찾기 (등록된 전부)
+    public List<Post> findAll() {
+        List<Post> posts = new ArrayList<Post>();
+        try {
+            Connection conn = ConnectionFactory.open();
+
+            PreparedStatement ps = conn.prepareStatement("select * from posts order by id desc");
+
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                Post one = new Post();
+
+                one.setId(rs.getInt("id"));
+                one.setWriterId(rs.getString("writer_id"));
+                one.setCategory(rs.getString("category"));
+                one.setTitle(rs.getString("title"));
+                one.setContent(rs.getString("content"));
+                one.setLikes(rs.getInt("likes"));
+                one.setViews(rs.getInt("views"));
+                one.setWritedAt(rs.getDate("writed_at"));
+                one.setModifiedAt(rs.getDate("modified_at"));
+
+                posts.add(one);
+            }
+
+            conn.close();
+        }catch(Exception e) {
+            System.out.println("UserDAO.create : "+ e.toString() );
+        }
+
+        return posts;
     }
 }
