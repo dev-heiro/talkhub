@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>TalkHub</title>
+    <title>TalkHub</title>xx
 </head>
 <body>
   <h1>TalkHub</h1>
