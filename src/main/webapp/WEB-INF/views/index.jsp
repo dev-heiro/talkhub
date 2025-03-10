@@ -10,29 +10,35 @@
 <html>
 <head>
     <title>TalkHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
 </head>
 <body>
-<h1 >TalkHub</h1>
-<p class="color-primary underline">
-    토크허브를 통해 사람들과 의견을 나누세요.
-</p>
-<c:choose>
-    <c:when test="${authentication}">
-        <div>
-            <a href="${pageContext.request.contextPath}/user/profile">마이페이지</a>
-            <a href="${pageContext.request.contextPath}/user/logout-proceed">로그아웃</a>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <div>
-            <a href="${pageContext.request.contextPath}/user/login">로그인</a>
-            <a href="${pageContext.request.contextPath}/user/join">회원가입</a>
-        </div>
-    </c:otherwise>
-</c:choose>
-<p>
-    <b class="color-primary">TalkHub</b> 에 오신 것을 <span>환영</span>합니다!
-</p>
+<div class="index">
+    <div style="padding: 15px">
+        <h1>TalkHub</h1>
+        <h3 style="font-weight: lighter">자유롭게 소통하는 공간</h3>
+        <p style="margin-bottom: 100px;">
+            토크허브에서 다양한 생각을 나누고, 새로운 인사이트를 얻어보세요.
+        </p>
+        <c:choose>
+            <c:when test="${authentication}">
+                <div>
+                    <a href="${pageContext.request.contextPath}/user/profile">마이페이지</a> |
+                    <a href="${pageContext.request.contextPath}/user/logout-proceed">로그아웃</a>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div>
+                    <a href="${pageContext.request.contextPath}/user/login">로그인</a> |
+                    <a href="${pageContext.request.contextPath}/user/join">회원가입</a>
+                </div>
+            </c:otherwise>
+        </c:choose>
+        <p>
+            지금 <b class="color-primary">TalkHub</b> 에서 대화를 시작해보세요!
+        </p>
+    </div>
+</div>
 </body>
 </html>

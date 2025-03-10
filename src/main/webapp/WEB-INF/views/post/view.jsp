@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>TalkHub</title>
@@ -21,9 +22,19 @@
   <hr/>
   <p style="white-space: pre-wrap">${post.content }</p>
   <hr/>
-  <a href="${pageContext.request.contextPath}/post/like-proceed?id=${post.id}">
-    <button type="button">추천하기</button>
-  </a>
+
+  <c:choose>
+    <c:when test="${alreadyLiked}">
+      <button type="button" disabled>이미 추천을 하였습니다.</button>
+    </c:when>
+    <c:otherwise>
+      <a href="${pageContext.request.contextPath}/post/like-proceed?id=${post.id}">
+        <button type="button">추천하기</button>
+      </a>
+    </c:otherwise>
+  </c:choose>
+
+
 </body>
 </html>
 
