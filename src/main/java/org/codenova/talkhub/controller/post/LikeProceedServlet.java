@@ -37,13 +37,7 @@ public class LikeProceedServlet extends HttpServlet {
         if (!alreadyLiked) {    // false 라면 좋아요 처리되게 if 처리를 했음.
             PostDAO dao = new PostDAO();
             dao.increaseLikesById(id);  // 좋아요가 올라감.
-            /*
-                PostLike log = new PostLike();
-                log.setPostId(id);
-                log.setUserId(requester.getId());
-                    or
-                PostLike log = new PostLike(-1, requester.getId(), id, null);
-            */
+
             PostLike log = PostLike.builder().postId(id).userId(requester.getId()).build();
             postLikeDAO.create(log);
         }
@@ -52,7 +46,19 @@ public class LikeProceedServlet extends HttpServlet {
     }
 }
 
+/*
+    PostLike log = new PostLike();
+    log.setPostId(id);
+    log.setUserId(requester.getId());
 
+    or
+
+    PostLike log = new PostLike(-1, requester.getId(), id, null);
+
+    or
+
+    PostLike log = PostLike.builder().postId(id).userId(requester.getId()).build();
+*/
 
 
 
