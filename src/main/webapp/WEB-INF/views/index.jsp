@@ -35,7 +35,7 @@
                 </div>
             </c:otherwise>
         </c:choose>
-        <p>
+        <p style="text-decoration: underline">
             지금 <b class="color-primary">TalkHub</b> 에서 대화를 시작해보세요!
         </p>
     </div>
